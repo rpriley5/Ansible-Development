@@ -28,7 +28,7 @@
 - name: Pull EE
   containers.podman.podman_image:
     name: "{{ ansible_image }}"
-    register: ee
+  register: ee
 
 - name: Ensure correct permissions if image was pulled
   ansible.builtin.command: chmod -R a+rx {{ additionalimagestores }}
