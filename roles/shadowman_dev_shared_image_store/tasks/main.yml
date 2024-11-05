@@ -22,8 +22,8 @@
 - name: Podman Login
   containers.podman.podman_login:
     username: "{{ username }}"
-    password: " {{ password }}"
-    registry: " {{ registry_url }}"
+    password: "{{ password }}"
+    registry: "{{ registry_url }}"
 
 - name: Pull EE
   containers.podman.podman_image:
