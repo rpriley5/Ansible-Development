@@ -23,7 +23,7 @@
   containers.podman.podman_login:
     username: "{{ username }}"
     password: " {{ password }}"
-    registry: "quay.io"
+    registry: " {{ registry_url }}"
 
 - name: Pull EE
   containers.podman.podman_image:

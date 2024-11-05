@@ -4,6 +4,12 @@
   become: true
 
   vars:
+    # username for private automation hub for EE or to password protected registry
+    username: USERNAME
+    # password for private automation hub for EE or to password protected registry
+    password: PASSWORD
+    # container regsitry url to login to via podman
+    registry_url: "quay.io"
     # specific image to pull
     ansible_image: registry.redhat.io/ansible-automation-platform-24/ee-supported-rhel8:latest
     # location of additional image store for shared storage
