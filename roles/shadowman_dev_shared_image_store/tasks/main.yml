@@ -13,19 +13,7 @@
     name: podman
     state: present
 
-- name: Check if EE present
-  ansible.builtin.command: podman --root {{ additionalimagestores }} image exists {{ ansible_image }}
-  register: exists
-  changed_when: exists.rc == 1
-  failed_when: exists.rc > 1
-
-# - name: Podman Login
-#   containers.podman.podman_login:
-#     username: "{{ username }}"
-#     password: "{{ password }}"
-#     registry: "{{ registry_url }}"
-
-- name: Pull EE
+- name: Pull EE if it does not exist
   containers.podman.podman_image:
     name: "{{ ansible_image }}"
     username: "{{ username }}"
