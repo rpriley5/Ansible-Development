@@ -19,11 +19,21 @@
   changed_when: exists.rc == 1
   failed_when: exists.rc > 1
 
-- name: Pull EE only if not present
-  ansible.builtin.command: podman pull --root {{ additionalimagestores }} --creds={{ registry_user }}:{{ registry_pass }} {{ ansible_image }}
-  register: ee
-  changed_when: ee.rc == 0
-  when: exists.rc == 1
+- name: Podman Pull EE
+  containers.podman.podman_login:
+    username: "{{ registry_user }}"
+    password: "{{ registry_pass }}"
+    registry: "quay.io"
+
+- name: Pull EE
+  containers.podman.podman_image:
+    name: "{{ ansible_image }}"
+
+# - name: Pull EE only if not present
+#   ansible.builtin.command: podman pull --root {{ additionalimagestores }} --creds={{ registry_user }}:{{ registry_pass }} {{ ansible_image }}
+#   register: ee
+#   changed_when: ee.rc == 0
+#   when: exists.rc == 1
 
 - name: Ensure correct permissions if image was pulled
   ansible.builtin.command: chmod -R a+rx {{ additionalimagestores }}
