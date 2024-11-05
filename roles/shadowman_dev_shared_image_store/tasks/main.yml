@@ -22,7 +22,7 @@
 - name: Podman Login
   containers.podman.podman_login:
     username: "{{ registry_user }}"
-    password: "{{ registry_pass }}"
+    password: mPTKu-M6fish10!
     registry: "quay.io"
 
 - name: Pull EE
