@@ -19,7 +19,7 @@
   changed_when: exists.rc == 1
   failed_when: exists.rc > 1
 
-- name: Podman Pull EE
+- name: Podman Login
   containers.podman.podman_login:
     username: "{{ registry_user }}"
     password: "{{ registry_pass }}"
