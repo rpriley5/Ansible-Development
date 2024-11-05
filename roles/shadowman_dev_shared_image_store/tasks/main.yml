@@ -19,19 +19,19 @@
   changed_when: exists.rc == 1
   failed_when: exists.rc > 1
 
-- name: Podman Login
-  containers.podman.podman_login:
-    username: "{{ username }}"
-    password: "{{ password }}"
-    registry: "{{ registry_url }}"
+# - name: Podman Login
+#   containers.podman.podman_login:
+#     username: "{{ username }}"
+#     password: "{{ password }}"
+#     registry: "{{ registry_url }}"
 
 - name: Pull EE
   containers.podman.podman_image:
     name: "{{ ansible_image }}"
-  register: ee
+    username: "{{ username }}"
+    password: "{{ password }}"
 
 - name: Ensure correct permissions if image was pulled
   ansible.builtin.command: chmod -R a+rx {{ additionalimagestores }}
   register: permissions
-  when: ee.rc == 0
   changed_when: permissions.rc == 0
