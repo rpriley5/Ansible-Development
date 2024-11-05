@@ -21,22 +21,17 @@
 
 - name: Podman Login
   containers.podman.podman_login:
-    username: "{{ registry_user }}"
-    password: mPTKu-M6fish10!
+    username: "{{ username }}"
+    password: " {{ password }}"
     registry: "quay.io"
 
 - name: Pull EE
   containers.podman.podman_image:
     name: "{{ ansible_image }}"
-
-# - name: Pull EE only if not present
-#   ansible.builtin.command: podman pull --root {{ additionalimagestores }} --creds={{ registry_user }}:{{ registry_pass }} {{ ansible_image }}
-#   register: ee
-#   changed_when: ee.rc == 0
-#   when: exists.rc == 1
+    register: ee
 
 - name: Ensure correct permissions if image was pulled
   ansible.builtin.command: chmod -R a+rx {{ additionalimagestores }}
   register: permissions
-  # when: ee.rc == 0
+  when: ee.rc == 0
   changed_when: permissions.rc == 0
