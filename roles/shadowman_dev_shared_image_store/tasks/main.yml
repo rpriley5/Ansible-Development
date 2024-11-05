@@ -38,5 +38,5 @@
 - name: Ensure correct permissions if image was pulled
   ansible.builtin.command: chmod -R a+rx {{ additionalimagestores }}
   register: permissions
-  when: ee.rc == 0
+  # when: ee.rc == 0
   changed_when: permissions.rc == 0
